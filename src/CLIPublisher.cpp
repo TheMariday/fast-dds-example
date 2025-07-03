@@ -38,25 +38,25 @@ void PubListener::on_publication_matched(DataWriter*, const PublicationMatchedSt
 CLIPublisher::CLIPublisher()
 	: participant_(nullptr)
 	, publisher_(nullptr)
-	, topic_(nullptr)
-	, writer_(nullptr)
-	, type_(new StringMessagePubSubType())
+	, command_topic_(nullptr)
+	, command_writer_(nullptr)
+	, command_type_(new StringMessagePubSubType())
 {
 }
 
 CLIPublisher::~CLIPublisher()
 {
-	if (writer_ != nullptr)
+	if (command_writer_ != nullptr)
 	{
-		publisher_->delete_datawriter(writer_);
+		publisher_->delete_datawriter(command_writer_);
 	}
 	if (publisher_ != nullptr)
 	{
 		participant_->delete_publisher(publisher_);
 	}
-	if (topic_ != nullptr)
+	if (command_topic_ != nullptr)
 	{
-		participant_->delete_topic(topic_);
+		participant_->delete_topic(command_topic_);
 	}
 	DomainParticipantFactory::get_instance()->delete_participant(participant_);
 }
@@ -73,11 +73,11 @@ bool CLIPublisher::init()
 		return false;
 	}
 
-	type_.register_type(participant_);
+	command_type_.register_type(participant_);
 
-	topic_ = participant_->create_topic("command", "StringMessage", TOPIC_QOS_DEFAULT);
+	command_topic_ = participant_->create_topic("command", "StringMessage", TOPIC_QOS_DEFAULT);
 
-	if (topic_ == nullptr)
+	if (command_topic_ == nullptr)
 	{
 		return false;
 	}
@@ -89,9 +89,9 @@ bool CLIPublisher::init()
 		return false;
 	}
 
-	writer_ = publisher_->create_datawriter(topic_, DATAWRITER_QOS_DEFAULT, &listener_);
+	command_writer_ = publisher_->create_datawriter(command_topic_, DATAWRITER_QOS_DEFAULT, &command_listener_);
 
-	if (writer_ == nullptr)
+	if (command_writer_ == nullptr)
 	{
 		return false;
 	}
@@ -105,11 +105,11 @@ void  CLIPublisher::run()
 		std::string user_message;
 		std::cout << "Message: ";
 		std::cin >> user_message;
-		if (listener_.matched_ > 0)
+		if (command_listener_.matched_ > 0)
 		{
 			StringMessage my_command;
 			my_command.message(user_message);
-			writer_->write(&my_command);
+			command_writer_->write(&my_command);
 		}
 	}
 }

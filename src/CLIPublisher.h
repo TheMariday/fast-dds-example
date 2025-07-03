@@ -45,11 +45,11 @@ private:
 
 	Publisher* publisher_;
 
-	Topic* topic_;
+	Topic* command_topic_;
 
-	DataWriter* writer_;
+	DataWriter* command_writer_;
 
-	TypeSupport type_;
+	TypeSupport command_type_;
 
-	PubListener listener_;
+	PubListener command_listener_;
 };
