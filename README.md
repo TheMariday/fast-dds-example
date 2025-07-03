@@ -2,7 +2,7 @@
 
 ## Installation:
 
-Firstly on windows, this only works in visual studio, bear that in mind.
+Firstly on windows, this only works in visual studio, bear that in mind. Otherwise it will fallover when it comes to finding openssl
 
 Download the installer from [here](https://www.eprosima.com/product-download) and then restart. usual stuff
 
@@ -25,4 +25,18 @@ More than that everything //should// just work!
 ## Terminology Zone:
 
 - Domain - All things in a domain can see and talk, domains have ID's, i.e. the `0` in `DomainParticipantFactory::get_instance()->create_participant(0, participantQos);`
-- 
+
+
+
+## Oh oh bloody fastddsgen
+
+- Install specifically v19 of the Java SDK from [here](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html) < Very important
+- `git clone --recursive https://github.com/eProsima/Fast-DDS-Gen.git fastddsgen`
+- Run `gradlew.bat assemble`
+- Run `./fastddsgen path/to/my/interface.idl`
+
+## install fast-dds monitor
+
+- Download from [here](https://www.eprosima.com/product-download) (only 3.1 has a windows installer btw)
+- Okay that was straightforward
+- I spoke too soon, this is basically useless unless you re-compile Fast-DDS with `STATISTICS=ON` as otherwise you can't see any graphable info, just who's publishing and who's subscribing

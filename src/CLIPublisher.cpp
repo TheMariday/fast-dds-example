@@ -65,7 +65,7 @@ bool CLIPublisher::init()
 {
 
 	DomainParticipantQos participantQos;
-	participantQos.name("Participant_publisher");
+	participantQos.name("CLI_Publisher");
 	participant_ = DomainParticipantFactory::get_instance()->create_participant(0, participantQos);
 
 	if (participant_ == nullptr)
