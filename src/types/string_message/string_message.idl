@@ -1,0 +1,5 @@
+struct StringMessage
+{
+    string message;
+    unsigned long long timestamp;
+};
