@@ -1,4 +1,4 @@
-#include "UISubscriber.h"#
+#include "UISubscriber.h"
 #include <memory>
 #include "types/string_message/string_messagePubSubTypes.hpp"
 
@@ -120,18 +120,44 @@ void UISubscriber::run()
 	}
 }
 
+std::string getOsName()
+{
+#ifdef _WIN64
+	return "Windows 64-bit";
+#elif _WIN32
+	return "Windows 32-bit";
+#elif __APPLE__ || __MACH__
+	return "Mac OSX";
+#elif __linux__
+	return "Linux";
+#elif __FreeBSD__
+	return "FreeBSD";
+#elif __unix || __unix__
+	return "Unix";
+#else
+	return "Other";
+#endif
+}
 
 int main(
 	int argc,
 	char** argv)
 {
 
-	auto ui_subscriber = std::make_unique<UISubscriber>();
+	printf("something!!!");
+	std::cout << "Starting subscriber on " << getOsName() << std::endl;
+	printf("something else!!!");
+
+	//std::cout << std::flush;
+
+	UISubscriber* ui_subscriber = new UISubscriber();
 
 	if (ui_subscriber->init())
 	{
 		ui_subscriber->run();
 	}
+
+	delete ui_subscriber;
 
 	return 0;
 }

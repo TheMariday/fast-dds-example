@@ -8,6 +8,87 @@ Download the installer from [here](https://www.eprosima.com/product-download) an
 
 More than that everything //should// just work!
 
+### Notes on linux install
+install dependencies for rpi
+```
+apt install git build-essential cmake libssl-dev libasio-dev libtinyxml2-dev \
+openjdk-17-jre-headless openjdk-17-jdk-headless
+python3 python3-xmlschema
+
+```
+
+apply [this fix](https://github.com/eProsima/Fast-DDS/issues/5277)
+```
+wget https://github.com/user-attachments/files/17588943/issue-5277.diff.gz
+gunzip issue-5277.dif.gz
+git patch -p1 issue-5277.diff
+```
+or not...
+```
+*** a/src/fastcdr/include/fastcdr/xcdr/detail/optional.hpp      2024-10-31 13:47:57.759071199 +0100
+--- b/src/fastcdr/include/fastcdr/xcdr/detail/optional.hpp      2024-10-31 14:32:37.473279173 +0100
+***************
+*** 39,45 ****
+--- 39,52 ----
+      {
+          if (engaged_)
+          {
++ #ifdef __GNUC__
++ #  pragma GCC diagnostic push
++ #  pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
++ #endif /*  __GNUC__ */
+              val_.~T();
++ #ifdef __GNUC__
++ #  pragma GCC diagnostic pop
++ #endif /*  __GNUC__ */
+          }
+      }
+
+***************
+*** 60,66 ****
+--- 67,80 ----
+      {
+      }
+
++ #ifdef __GNUC__
++ #  pragma GCC diagnostic push
++ #  pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
++ #endif /*  __GNUC__ */
+      ~optional_storage() = default;
++ #ifdef __GNUC__
++ #  pragma GCC diagnostic pop
++ #endif /*  __GNUC__ */
+  };
+  /* *INDENT-ON* */
+  } // namespace detail
+```
+
+uninstall cmake, re-install with snap, 4.0.1
+
+or not! ffs!
+
+
+okay just download, unzip, point VS to it, select unix makefiles and go
+
+
+WHY DID THAT WORK WHAT DID I DO AAAA, remote console opened correctly that time
+
+just go to debug -> remote console //after// it's launched
+
+run `./install.sh --no-install-dependencies` 
+        apt install --yes --no-install-recommends \
+            git \
+            build-essential \
+            cmake \
+            libssl-dev \
+            libasio-dev \
+            libtinyxml2-dev \
+            openjdk-11-jre-headless \
+            python3 \
+            python3-xmlschema
+    fi
+
+
 ## Acronym Zone:
 
 
