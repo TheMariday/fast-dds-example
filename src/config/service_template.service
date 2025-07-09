@@ -1,0 +1,19 @@
+# This is the default template that is used to create each nodes custom service
+# DO NOT INSTALL AS IS, as it requires the project name
+
+[Unit]
+Description=${PROJECT_NAME} %I
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+# We need to wait for the dhcpcd service to start to assign a valid IP address
+After=dhcpcd.service
+
+[Service]
+User=root
+WorkingDirectory=/home/pi
+Restart=always
+ExecStart=/usr/local/bin/${PROJECT_NAME} %I
+
+[Install]
+WantedBy=multi-user.target

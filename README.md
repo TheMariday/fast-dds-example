@@ -11,19 +11,10 @@ More than that everything //should// just work!
 ### Notes on linux install
 install dependencies for rpi
 ```
-apt install git build-essential cmake libssl-dev libasio-dev libtinyxml2-dev \
-openjdk-17-jre-headless openjdk-17-jdk-headless
-python3 python3-xmlschema
-
+apt install git build-essential cmake libssl-dev libasio-dev libtinyxml2-dev openjdk-17-jre-headless openjdk-17-jdk-headless python3 python3-xmlschema
 ```
 
 apply [this fix](https://github.com/eProsima/Fast-DDS/issues/5277)
-```
-wget https://github.com/user-attachments/files/17588943/issue-5277.diff.gz
-gunzip issue-5277.dif.gz
-git patch -p1 issue-5277.diff
-```
-or not...
 ```
 *** a/src/fastcdr/include/fastcdr/xcdr/detail/optional.hpp      2024-10-31 13:47:57.759071199 +0100
 --- b/src/fastcdr/include/fastcdr/xcdr/detail/optional.hpp      2024-10-31 14:32:37.473279173 +0100
@@ -63,30 +54,12 @@ or not...
   } // namespace detail
 ```
 
-uninstall cmake, re-install with snap, 4.0.1
-
-or not! ffs!
-
-
-okay just download, unzip, point VS to it, select unix makefiles and go
-
-
-WHY DID THAT WORK WHAT DID I DO AAAA, remote console opened correctly that time
-
-just go to debug -> remote console //after// it's launched
-
 run `./install.sh --no-install-dependencies` 
-        apt install --yes --no-install-recommends \
-            git \
-            build-essential \
-            cmake \
-            libssl-dev \
-            libasio-dev \
-            libtinyxml2-dev \
-            openjdk-11-jre-headless \
-            python3 \
-            python3-xmlschema
-    fi
+
+
+Cmake too old? Download cmake tar.gz and point VS straight at it like `/home/pi/cmake_from_source/cmake-4.1.0-rc1-linux-aarch64/bin/cmake` in the configurations
+
+Can't see the terminal output on remote builds? Just go to debug -> remote console //after// it's launched
 
 
 ## Acronym Zone:

@@ -1,37 +1,24 @@
-#include "types/string_message/string_message.hpp"
+#include "../../message_types/string_message/string_message.hpp"
 
 #include <atomic>
 
-#include <fastdds/dds/publisher/DataWriterListener.hpp>
-#include <fastdds/dds/core/status/PublicationMatchedStatus.hpp>
 #include <fastdds/dds/domain/DomainParticipant.hpp>
 #include <fastdds/dds/publisher/Publisher.hpp>
 #include <fastdds/dds/topic/Topic.hpp>
-#include <fastdds/dds/publisher/DataWriter.hpp>
+
 #include <fastdds/dds/topic/TypeSupport.hpp>
 #include <fastdds/dds/publisher/PublisherListener.hpp>
+#include <toml.hpp>
+
+#include "../../common/PubListener.h"
 
 using namespace eprosima::fastdds::dds;
-
-class PubListener : public DataWriterListener
-{
-public:
-
-	PubListener();
-
-	~PubListener() override;
-
-	void on_publication_matched(DataWriter*, const PublicationMatchedStatus& info) override;
-
-	std::atomic_int matched_;
-
-};
 
 class CLIPublisher
 {
 public:
 
-	CLIPublisher();
+	CLIPublisher(toml::basic_value<toml::type_config> config);
 
 	virtual ~CLIPublisher();
 
@@ -52,4 +39,6 @@ private:
 	TypeSupport command_type_;
 
 	PubListener command_listener_;
+
+	toml::basic_value<toml::type_config> config_;
 };
