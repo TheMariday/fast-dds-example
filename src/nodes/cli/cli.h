@@ -2,5 +2,5 @@
 
 namespace skyframe::cli {
 
-	std::string get_user_input();
+std::string get_user_input();
 }

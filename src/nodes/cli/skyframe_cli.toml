@@ -1,2 +1,1 @@
-[topics]
-publish="/skyframe/cli/command"
+[topics] publish = "/skyframe/cli/command"
