@@ -11,7 +11,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     endif()
 endif()
 
-add_definitions(-DPROJECT_NAME=${PROJECT_NAME} )
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR})
 
 ################################################### Fetch Content ###################################################
 
@@ -35,10 +35,14 @@ FetchContent_MakeAvailable(spdlog)
 
 ################################################### FASTDDS ###################################################
 
-if(NOT fastcdr_FOUND)
-    find_package(fastcdr 2 REQUIRED)
-endif()
+include(${SKYFRAME_ROOT}/src/common/CMake/external_foonathan_memory.cmake)
+include(${SKYFRAME_ROOT}/src/common/CMake/external_fastdds.cmake)
 
-if(NOT fastdds_FOUND)
-    find_package(fastdds 3 REQUIRED)
-endif()
+
+#if(NOT fastcdr_FOUND)
+#    find_package(fastcdr 2 REQUIRED)
+#endif()
+
+#if(NOT fastdds_FOUND)
+#    find_package(fastdds 3 REQUIRED)
+#endif()

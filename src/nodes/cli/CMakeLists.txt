@@ -8,6 +8,7 @@ include(${SKYFRAME_ROOT}/src/common/CMake/common_dependencies.cmake)
 
 file(GLOB SKYFRAME_STRING_MESSAGE_CXX "${SKYFRAME_ROOT}/src/message_types/string_message/*.cxx")
 
+
 add_executable(${PROJECT_NAME} 
     main.cpp
     cli_node.cpp
@@ -15,7 +16,7 @@ add_executable(${PROJECT_NAME}
     ${SKYFRAME_STRING_MESSAGE_CXX}
 )
 
-target_compile_definitions(${PROJECT_NAME} PRIVATE PROJECT_NAME_STRING=\"${PROJECT_NAME}\")
+target_compile_options(${PROJECT_NAME} PRIVATE -Wno-maybe-uninitialized)
 
 target_include_directories(${PROJECT_NAME} PRIVATE 
 ${SKYFRAME_ROOT}/src/message_types
