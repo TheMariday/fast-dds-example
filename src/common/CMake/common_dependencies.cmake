@@ -1,13 +1,13 @@
 ################################################### CPP ###################################################
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 include(CheckCXXCompilerFlag)
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-    check_cxx_compiler_flag(-std=c++20 SUPPORTS_CXX20)
-    if(NOT SUPPORTS_CXX20)
-        message(FATAL_ERROR "Compiler doesn't support C++20")
+    check_cxx_compiler_flag(-std=c++17 SUPPORTS_CXX17)
+    if(NOT SUPPORTS_CXX17)
+        message(FATAL_ERROR "Compiler doesn't support C++17")
     endif()
 endif()
 
@@ -35,6 +35,8 @@ FetchContent_MakeAvailable(spdlog)
 
 ################################################### FASTDDS ###################################################
 
+# So, you //can// install fastdds via the following cmake files, however it's a complete PITA
+# I'd just use the binaries you can install from fastdds
 include(${SKYFRAME_ROOT}/src/common/CMake/external_foonathan_memory.cmake)
 include(${SKYFRAME_ROOT}/src/common/CMake/external_fastdds.cmake)
 
@@ -42,7 +44,7 @@ include(${SKYFRAME_ROOT}/src/common/CMake/external_fastdds.cmake)
 #if(NOT fastcdr_FOUND)
 #    find_package(fastcdr 2 REQUIRED)
 #endif()
-
+#
 #if(NOT fastdds_FOUND)
 #    find_package(fastdds 3 REQUIRED)
 #endif()

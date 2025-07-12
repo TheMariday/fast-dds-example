@@ -7,7 +7,7 @@
 #include <toml.hpp>
 
 int main(int argc, char **argv) {
-  spdlog::info("Starting publisher");
+  spdlog::info("Starting publisher...");
 
   toml::basic_value<toml::type_config> config =
       skyframe::get_config(argc, argv);

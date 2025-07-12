@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.27)
+cmake_minimum_required(VERSION 3.25)
 
 project(skyframe_cli)
 
@@ -15,8 +15,6 @@ add_executable(${PROJECT_NAME}
     cli.cpp
     ${SKYFRAME_STRING_MESSAGE_CXX}
 )
-
-target_compile_options(${PROJECT_NAME} PRIVATE -Wno-maybe-uninitialized)
 
 target_include_directories(${PROJECT_NAME} PRIVATE 
 ${SKYFRAME_ROOT}/src/message_types
