@@ -4,12 +4,11 @@
 #include <filesystem>
 #include <iostream>
 #include <memory>
-#include <toml.hpp>
 
 int main(int argc, char **argv) {
   spdlog::info("Starting publisher...");
 
-  toml::basic_value<toml::type_config> config =
+  skyframe::config config =
       skyframe::get_config(argc, argv);
 
   auto cli_publisher = std::make_unique<CLIPublisher>(config);

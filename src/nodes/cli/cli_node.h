@@ -1,3 +1,4 @@
+#pragma once
 #include "string_message/string_message.hpp"
 
 #include <atomic>
@@ -8,7 +9,7 @@
 
 #include <fastdds/dds/publisher/PublisherListener.hpp>
 #include <fastdds/dds/topic/TypeSupport.hpp>
-#include <toml.hpp>
+#include "config.hpp"
 
 #include "PubListener.hpp"
 
@@ -16,7 +17,7 @@ using namespace eprosima::fastdds::dds;
 
 class CLIPublisher {
 public:
-  CLIPublisher(toml::basic_value<toml::type_config> config);
+  CLIPublisher(skyframe::config config);
 
   virtual ~CLIPublisher();
 
@@ -37,5 +38,5 @@ private:
 
   PubListener command_listener_;
 
-  toml::basic_value<toml::type_config> config_;
+  skyframe::config config_;
 };

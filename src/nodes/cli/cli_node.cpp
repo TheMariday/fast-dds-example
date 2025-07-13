@@ -6,11 +6,11 @@
 #include <fastdds/dds/domain/qos/DomainParticipantQos.hpp>
 #include <spdlog/spdlog.h>
 #include <thread>
-#include <toml.hpp>
+#include "config.hpp"
 
 #include "string_message/string_messagePubSubTypes.hpp"
 
-CLIPublisher::CLIPublisher(toml::basic_value<toml::type_config> config)
+CLIPublisher::CLIPublisher(skyframe::config config)
     : participant_(nullptr), publisher_(nullptr), command_topic_(nullptr),
       command_writer_(nullptr), command_type_(new StringMessagePubSubType()),
       config_(config) {}

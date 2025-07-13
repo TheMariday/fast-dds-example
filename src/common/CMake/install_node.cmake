@@ -1,10 +1,12 @@
+################################################### Link common libraries ###################################################
+
+target_link_libraries(${PROJECT_NAME} fastdds fastcdr toml11::toml11 spdlog)
 
 ################################################### Installation & Services ###################################################
 
 # Find the configuration root, either in program data if windows or user local etc on linux.
 
 if (WIN32)
-   file(TO_CMAKE_PATH "$ENV{ProgramData}" PROGRAM_DATA_PATH)
    file(TO_CMAKE_PATH "$ENV{ProgramData}/skyframe" CONFIG_ROOT)
 elseif(UNIX AND NOT APPLE)
     file(TO_CMAKE_PATH "/etc/skyframe" CONFIG_ROOT)

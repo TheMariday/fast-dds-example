@@ -7,7 +7,7 @@ set(SKYFRAME_ROOT ../../..)
 include(${SKYFRAME_ROOT}/src/common/CMake/common_dependencies.cmake)
 
 file(GLOB SKYFRAME_STRING_MESSAGE_CXX "${SKYFRAME_ROOT}/src/message_types/string_message/*.cxx")
-
+ 
 
 add_executable(${PROJECT_NAME} 
     main.cpp
