@@ -17,8 +17,8 @@ add_executable(${PROJECT_NAME}
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE 
-${SKYFRAME_ROOT}/src/message_types
-${SKYFRAME_ROOT}/src/common
+    ${SKYFRAME_ROOT}/src/message_types
+    ${SKYFRAME_ROOT}/src/common
 )
 
 target_link_libraries(${PROJECT_NAME} fastdds fastcdr toml11::toml11 spdlog)

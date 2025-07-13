@@ -11,7 +11,8 @@ namespace skyframe {
 		}
 
 		if (config_name.empty()) {
-			auto config_path = std::filesystem::path{ "/usr/local/etc" } / PROJECT_NAME_STRING / "default.toml";
+			auto config_path = std::filesystem::path{ CONFIG_ROOT } / PROJECT_NAME_STRING / "default.toml";
+			//spdlog::info("config path set to {}", config_path.c_str());
 			return toml::parse(config_path, toml::spec::v(1, 1, 0));
 		}
 
@@ -20,7 +21,7 @@ namespace skyframe {
 			return toml::parse(config_path, toml::spec::v(1, 1, 0));
 		}
 		catch (toml::file_io_error e) {
-			auto config_path = std::filesystem::path{ "/usr/local/etc" } / PROJECT_NAME_STRING / (config_name + ".toml");
+			auto config_path = std::filesystem::path{ CONFIG_ROOT } / PROJECT_NAME_STRING / (config_name + ".toml");
 			return toml::parse(config_path, toml::spec::v(1, 1, 0));
 		}
 

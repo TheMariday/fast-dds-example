@@ -1,7 +1,7 @@
 ################################################### CPP ###################################################
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(CheckCXXCompilerFlag)
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
